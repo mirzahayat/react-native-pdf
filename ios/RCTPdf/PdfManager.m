@@ -50,17 +50,7 @@ RCT_EXPORT_METHOD(loadFile:(NSString *)path
 
     if (path != nil && path.length != 0) {
 
-        NSString *decodedPath = (__bridge_transfer NSString *)CFURLCreateStringByReplacingPercentEscapes(NULL, (CFStringRef)path, CFSTR(""));
-        
-        NSString *finalPath = NULL;
-        if (decodedPath == NULL) {
-            // use orignal provided path
-            finalPath = path;
-        } else {
-            finalPath = decodedPath;
-        }
-        
-        NSURL *pdfURL = [NSURL fileURLWithPath:finalPath];
+        NSURL *pdfURL = [NSURL fileURLWithPath:path];
         CGPDFDocumentRef pdfRef = CGPDFDocumentCreateWithURL((__bridge CFURLRef) pdfURL);
 
         if (pdfRef == NULL) {

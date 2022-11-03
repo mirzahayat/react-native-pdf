@@ -6,7 +6,7 @@ import { Component } from 'react';
 
 import type { Node } from 'react';
 import type { FormField, Methods } from 'rn-fetch-blob';
-import type { ViewStyleProp } from 'react-native/Libraries/StyleSheet/StyleSheet'
+import { StyleSheet } from 'react-native';
 
 export type AssetId = number;
 
@@ -17,7 +17,6 @@ export type FitBoth = 2;
 export type Source = {
   body?: string | FormField[],
   cache?: boolean,
-  cacheFileName?: string,
   expiration?: number,
   headers?: { [key: string]: string },
   method?: Methods,
@@ -32,7 +31,8 @@ export type TableContent = {
 };
 
 export type Props = {
-  renderActivityIndicator?: (progress: number) => Node,
+  activityIndicator?: Node,
+  activityIndicatorProps?: { [prop: string]: mixed },
   enableAnnotationRendering?: boolean,
   enableAntialiasing?: boolean,
   enablePaging?: boolean,
@@ -41,23 +41,19 @@ export type Props = {
   horizontal?: boolean,
   maxScale?: number,
   minScale?: number,
-  singlePage?: boolean,
   onError?: (error: Error) => void,
   onLoadComplete?: (numberOfPages: number, path: string, size: { height: number, width: number }, tableContents: ?TableContent[]) => void,
   onLoadProgress?: (percent: number) => void,
   onPageChanged?: (page: number, numberOfPages: number) => void,
-  onPageSingleTap?: (page: number, x: number, y: number) => void,
+  onPageSingleTap?: (page: number) => void,
   onScaleChanged?: (scale: number) => void,
-  onPressLink?: (url: string) => void,
   page?: number,
   password?: string,
   scale?: number,
   source: AssetId | Source,
   spacing?: number,
-  style?: ViewStyleProp,
+  style?: StyleSheet.Styles,
   testID?: string
 };
 
-declare export default class Pdf extends Component<Props> {
-  setPage: (pageNumber: number) => void;
-}
+declare export default class Pdf extends Component<Props> {}
